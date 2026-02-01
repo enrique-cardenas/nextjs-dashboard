@@ -9,19 +9,33 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = useDebouncedCallback((term: string) => {
-    console.log(`Searching... ${term}`);
+  // const handleSearch = useDebouncedCallback((term: string) => {
+  //   console.log(`Searching... ${term}`);
+  //   URLSearchParams is a built-in JavaScript Web API for manipulating a URL's query string
+  //   const params = new URLSearchParams(searchParams);
+  //   params.set('page', '1');
+  //   console.log(params);
+  //   if (term) {
+  //     params.set('query', term);
+  //   } else {
+  //     params.delete('query');
+  //   }
+  //   replace(`${pathname}?${params.toString()}`);
+  //   console.log(params.get('query'));
+  // }, 300);
+
+  // ------------ Non Debounced version for immediate use ------------
+  function handleSearch(term: string) {
+    // URLSearchParams is a built-in JavaScript Web API for manipulating a URL's query string
     const params = new URLSearchParams(searchParams);
-    params.set('page', '1');
-    console.log(params);
     if (term) {
       params.set('query', term);
     } else {
       params.delete('query');
     }
     replace(`${pathname}?${params.toString()}`);
-    console.log(params.get('query'));
-  }, 300);
+  }
+
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
